@@ -1,6 +1,10 @@
+package elements;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+
+import mazeGame.Mapa;
+import mazeGame.nuevoLaberinto;
 
 public class Personaje {
     Mapa lab = new Mapa();

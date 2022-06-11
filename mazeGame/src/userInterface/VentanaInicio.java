@@ -1,6 +1,10 @@
+package userInterface;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import game.Juego;
+import mazeGame.Mapa;
 
 
 

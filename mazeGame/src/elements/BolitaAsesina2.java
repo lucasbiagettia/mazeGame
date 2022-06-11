@@ -1,5 +1,9 @@
+package elements;
 import java.awt.Color;
 import java.awt.Graphics;
+
+import mazeGame.Mapa;
+import mazeGame.nuevoLaberinto;
 
 
 public class BolitaAsesina2 {

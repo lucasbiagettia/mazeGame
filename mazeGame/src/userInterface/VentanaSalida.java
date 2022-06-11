@@ -1,3 +1,5 @@
+package userInterface;
+import game.Juego;
 
 public class VentanaSalida extends javax.swing.JFrame {
 

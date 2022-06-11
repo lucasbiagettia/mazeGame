@@ -1,5 +1,4 @@
-
-
+package mazeGame;
 public class nuevoLaberinto {
     Mapa mapa = new Mapa();
     public boolean hayMapa = false;
