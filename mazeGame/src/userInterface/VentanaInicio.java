@@ -3,7 +3,7 @@ package userInterface;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import game.Juego;
+import game.Game;
 import mazeGame.Mapa;
 
 
@@ -95,14 +95,14 @@ public class VentanaInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        Juego.setConBolitaAsesina(true);
+        Game.setConBolitaAsesina(true);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Juego.inicioJuego();        // TODO add your handling code here:
-        Juego.setInicioAbierta(false);
+        Game.setInicioAbierta(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

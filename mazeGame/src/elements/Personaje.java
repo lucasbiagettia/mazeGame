@@ -4,11 +4,11 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import mazeGame.Mapa;
-import mazeGame.nuevoLaberinto;
+import mazeGame.Maze;
 
 public class Personaje {
     Mapa lab = new Mapa();
-    int [][] laberinto = nuevoLaberinto.getLaberinto();
+    int [][] laberinto = Maze.getLaberinto();
     public int x = 80;
     public int y = 80;
     private final int ancho = 40;

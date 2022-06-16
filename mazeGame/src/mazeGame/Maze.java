@@ -1,5 +1,5 @@
 package mazeGame;
-public class nuevoLaberinto {
+public class Maze {
     Mapa mapa = new Mapa();
     public boolean hayMapa = false;
     public static int[][] laberinto = generarMapa();

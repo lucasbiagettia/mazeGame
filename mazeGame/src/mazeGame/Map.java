@@ -2,10 +2,10 @@ package mazeGame;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Mapa {
+public class Map {
     
     public static void setTamano(int tamano) {
-        Mapa.tamano = tamano;
+        Map.tamano = tamano;
     }
     
     public static int tamano;// = VentanaInicio.tamano.getValue();
@@ -37,7 +37,7 @@ public class Mapa {
     
 
     
-    int [][] laberinto = nuevoLaberinto.laberinto;
+    int [][] laberinto = Maze.laberinto;
  
     public final void paint (Graphics grafico){
         System.out.println("NumFilas "+ numFilas +" numColumnas "+ numColumnas);

@@ -1,5 +1,5 @@
 package userInterface;
-import game.Juego;
+import game.Game;
 
 public class VentanaSalida extends javax.swing.JFrame {
 
@@ -41,14 +41,14 @@ public class VentanaSalida extends javax.swing.JFrame {
             }
         });
 
-        if(Juego.perdio){
-            jLabel1.setText("Perdiste despues de "+Juego.mov+" movimientos");
-            Juego.perdio=false;
+        if(Game.perdio){
+            jLabel1.setText("Perdiste despues de "+Game.mov+" movimientos");
+            Game.perdio=false;
         }
         else{
-            jLabel1.setText("Ganaste despues de "+Juego.mov+" movimientos"
+            jLabel1.setText("Ganaste despues de "+Game.mov+" movimientos"
             );
-            Juego.perdio = false;
+            Game.perdio = false;
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

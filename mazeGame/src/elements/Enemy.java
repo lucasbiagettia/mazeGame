@@ -3,13 +3,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import mazeGame.Mapa;
-import mazeGame.nuevoLaberinto;
+import mazeGame.Maze;
 
 
-public class BolitaAsesina2 {
+public class Enemy {
     Mapa lab = new Mapa();
     
-    int [][] laberinto = nuevoLaberinto.getLaberinto();
+    int [][] laberinto = Maze.getLaberinto();
     public int x = 40* (lab.getNumColumnas()-3);
     public int y = 40* (lab.getNumFilas() -3);
     private final int ancho = 40;

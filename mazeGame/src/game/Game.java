@@ -8,15 +8,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import elements.BolitaAsesina2;
+import elements.Enemy;
 import elements.Personaje;
 import mazeGame.Mapa;
 
-public class Juego extends JPanel {
+public class Game extends JPanel {
 
     Mapa mapa = new Mapa();
     Personaje personaje = new Personaje ();
-    BolitaAsesina2 bolitaAsesina = new BolitaAsesina2 ();
+    Enemy bolitaAsesina = new Enemy ();
     private static boolean conBolitaAsesina = false;
     public static boolean inicioAbierta = true;
     public static int mov = 0;
@@ -25,19 +25,19 @@ public class Juego extends JPanel {
     
 
     public static void setInicioAbierta(boolean inicioAbierta) {
-        Juego.inicioAbierta = inicioAbierta;
+        Game.inicioAbierta = inicioAbierta;
     }
     
 
     static void setConBolitaAsesina(boolean conBolitaAsesina) {
-        Juego.conBolitaAsesina = conBolitaAsesina;
+        Game.conBolitaAsesina = conBolitaAsesina;
     }
 
     
 
     
     
-    public Juego(){
+    public Game(){
         
         int movimientos = 0;
         
@@ -96,7 +96,7 @@ public class Juego extends JPanel {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -104,7 +104,7 @@ public class Juego extends JPanel {
         
         
         JFrame ventana = new JFrame ("Primer laberinto");
-        Juego game = new Juego();
+        Game game = new Game();
         
         ventana.add(game);
         int alto = (Mapa.tamano )*2+7; //Mapa.getNumFilas();
@@ -122,7 +122,7 @@ public class Juego extends JPanel {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             ventana.repaint();
