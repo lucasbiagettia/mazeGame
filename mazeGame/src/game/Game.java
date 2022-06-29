@@ -9,13 +9,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import elements.Enemy;
-import elements.Personaje;
+import elements.Character;
 import mazeGame.Mapa;
 
 public class Game extends JPanel {
 
     Mapa mapa = new Mapa();
-    Personaje personaje = new Personaje ();
+    Character personaje = new Character ();
     Enemy bolitaAsesina = new Enemy ();
     private static boolean conBolitaAsesina = false;
     public static boolean inicioAbierta = true;
