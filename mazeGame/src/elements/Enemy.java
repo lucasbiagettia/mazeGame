@@ -7,7 +7,7 @@ import mazeGame.Maze;
 
 
 public class Enemy {
-    Mapa lab = new Mapa();
+//    Mapa lab = new Mapa();
     
     int [][] laberinto = Maze.getLaberinto();
     public int x = 40* (lab.getNumColumnas()-3);

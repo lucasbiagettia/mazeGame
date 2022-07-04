@@ -14,28 +14,25 @@ import mazeGame.Mapa;
 
 public class Game extends JPanel {
 
-    Mapa mapa = new Mapa();
-    Character personaje = new Character ();
-    Enemy bolitaAsesina = new Enemy ();
-    private static boolean conBolitaAsesina = false;
-    public static boolean inicioAbierta = true;
-    public static int mov = 0;
-    private static boolean termino = false;
-    public static boolean perdio= false;
+    Map map;
+    Maze maze;
+    Character character;
+    Enemy bolitaAsesina;
     
-
-    public static void setInicioAbierta(boolean inicioAbierta) {
-        Game.inicioAbierta = inicioAbierta;
+    private static boolean withEnemy = false;
+    private int movements = 0;
+    private boolean finished = false;
+    private boolean win= false;
+    
+    Game game (int height, int width) {
+    	map = new Map(height, width);
+    	maze = new Maze(map);
+    	character = new Character(map)
+    	if (withEnemy) {
+    		withEnemy = true;
+    		enemy = new Enemy (map);
+    	}
     }
-    
-
-    static void setConBolitaAsesina(boolean conBolitaAsesina) {
-        Game.conBolitaAsesina = conBolitaAsesina;
-    }
-
-    
-
-    
     
     public Game(){
         
