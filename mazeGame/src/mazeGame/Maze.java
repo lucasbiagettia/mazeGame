@@ -18,11 +18,14 @@ public class Maze {
 			return laberinto;
 		}
 	}
-
+	
+	
+	// TODO tengo que ver como resuelvo esto
+	// Debería generar los bloques originales
 	public void generateMaze() {
 
-		int a = (Map.tamano) * 2 + 7; // Mapa.getNumFilas();
-		int b = (Map.tamano) * 2 + 17; // Mapa.getNumColumnas();
+		int a = (Map.tamano) * 2 + 7;
+		int b = (Map.tamano) * 2 + 17;
 
 		maze = new Block[a][b];
 		System.out.println("newMap " + a +" x "+ b);
@@ -54,6 +57,8 @@ public class Maze {
 
 	}
 
+	
+	// TODO este es el algoritmo que me genera el mapa, hay que hacer que sea concordante con los tipos de blocks
 	private static void recorrer(int a, int b, int[][] nuevoMapa) {
 		if (verificarVacios(a, b, nuevoMapa)) {
 			int direccion = (int) (Math.random() * 4);
