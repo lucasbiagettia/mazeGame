@@ -1,19 +1,21 @@
 package mazeGame;
 
+import program.MazeConfiguration;
+
 public class Maze {
 	private static boolean isPresent = false;
 	private static Block[][] maze;
 
 	public static Block[][] getMaze() {
 		if (isPresent = false) {
-			Maze newMaze = new Maze(50);
-			return newMaze.getMaze();
-		}
-		else {
+			isPresent = true;
+			maze = generateMaze(MazeConfiguration.size);
+			return Maze.getMaze();
+		} else {
 			return maze;
 		}
 	}
-	
+
 	private Maze(int size) {
 		isPresent = true;
 		maze = generateMaze(size);
@@ -21,7 +23,7 @@ public class Maze {
 
 	// TODO tengo que ver como resuelvo esto
 	// Debería generar los bloques originales
-	private Block[][] generateMaze(int size) {
+	private static Block[][] generateMaze(int size) {
 		int height = size * 2 + 7;
 		int width = size * 2 + 17;
 		maze = new Block[height][width];
@@ -59,61 +61,62 @@ public class Maze {
 	}
 
 	private void travel(int a, int b, Block[][] maze) {
-		//TODO una verificacion
-		
-		
-		int direccion = (int) (Math.random() * 4);
-		// 0 up
-		// 1 down
-		// 2 right
-		// 3 left
+		if (maze[a - 1][b] == Block.free || maze[a + 1][b] == Block.free || maze[a][b - 1] == Block.free
+				|| maze[a][b + 2] == Block.free) {
 
-		switch (direccion) {
-		case 0: {
-			try {
-				if (maze[a - 2][b] == Block.free) {
-					maze[a - 1][b] = Block.free;
-					a = a - 2;
-					travel(a, b, maze);
-				}
-			} catch (Exception e) {
-			}
-			travel(a, b, maze);
-		}
-		case 1: {
-			try {
-				if (maze[a + 2][b] == Block.free) {
-					maze[a + 1][b] = Block.free;
-					a = a + 2;
-					travel(a, b, maze);
-				}
-			} catch (Exception e) {
-			}
-			travel(a, b, maze);
-		}
-		case 2: {
-			try {
-				if (maze[a][b - 2] == Block.free) {
-					maze[a][b - 1] = Block.free;
-					b = b - 2;
-					travel(a, b, maze);
-				}
-			} catch (Exception e) {
-			}
-			travel(a, b, maze);
-		}
-		case 3: {
-			try {
-				if (maze[a][b + 2] == Block.free) {
-					maze[a][b + 1] = Block.free;
-					b = b + 2;
-					travel(a, b, maze);
-				}
-			} catch (Exception e) {
-			}
-			travel(a, b, maze);
-		}
+			int direccion = (int) (Math.random() * 4);
+			// 0 up
+			// 1 down
+			// 2 right
+			// 3 left
 
+			switch (direccion) {
+			case 0: {
+				try {
+					if (maze[a - 2][b] == Block.free) {
+						maze[a - 1][b] = Block.free;
+						a = a - 2;
+						travel(a, b, maze);
+					}
+				} catch (Exception e) {
+				}
+				travel(a, b, maze);
+			}
+			case 1: {
+				try {
+					if (maze[a + 2][b] == Block.free) {
+						maze[a + 1][b] = Block.free;
+						a = a + 2;
+						travel(a, b, maze);
+					}
+				} catch (Exception e) {
+				}
+				travel(a, b, maze);
+			}
+			case 2: {
+				try {
+					if (maze[a][b - 2] == Block.free) {
+						maze[a][b - 1] = Block.free;
+						b = b - 2;
+						travel(a, b, maze);
+					}
+				} catch (Exception e) {
+				}
+				travel(a, b, maze);
+			}
+			case 3: {
+				try {
+					if (maze[a][b + 2] == Block.free) {
+						maze[a][b + 1] = Block.free;
+						b = b + 2;
+						travel(a, b, maze);
+					}
+				} catch (Exception e) {
+				}
+				travel(a, b, maze);
+			}
+
+			}
 		}
 	}
 }
