@@ -1,27 +1,27 @@
 package mazeGame;
 
 public class Maze {
-	Mapa mapa = new Mapa();
-	public boolean hayMapa = false;
-	public Block[][] maze;
+	private static boolean isPresent = false;
+	private static Block[][] maze;
 
-	public static int[][] getLaberinto() {
-		return laberinto;
-	}
-
-	public int[][] mapa(int[][] laberinto) {
-		if (!hayMapa) {
-			laberinto = generateMaze();
-			hayMapa = true;
-			return laberinto;
-		} else {
-			return laberinto;
+	public static Block[][] getMaze() {
+		if (isPresent = false) {
+			Maze newMaze = new Maze(50);
+			return newMaze.getMaze();
 		}
+		else {
+			return maze;
+		}
+	}
+	
+	private Maze(int size) {
+		isPresent = true;
+		maze = generateMaze(size);
 	}
 
 	// TODO tengo que ver como resuelvo esto
 	// Debería generar los bloques originales
-	private Block[][] generateMap (int size) {
+	private Block[][] generateMaze(int size) {
 		int height = size * 2 + 7;
 		int width = size * 2 + 17;
 		maze = new Block[height][width];
@@ -47,57 +47,73 @@ public class Maze {
 				}
 			}
 		}
-		return generate(2, 2, maze);
+		return maze;
+//		ver como se hace el travel;
 	}
 
-	// TODO este es el algoritmo que me genera el mapa, hay que hacer que sea
-	// concordante con los tipos de blocks
+	// Este algoritmo recive el mapaBase y lo "limpia usando la función recursiva
+	// travel
+	private void generate(int a, int b, Block[][] maze) {
+		// Ver si es necesario
 
-	private Block[][] generate(int a, int b, Block[][] maze) {
+	}
 
+	private void travel(int a, int b, Block[][] maze) {
+		//TODO una verificacion
+		
+		
 		int direccion = (int) (Math.random() * 4);
-		// 0 arriba
-		// 1 abajo
-		// 2 derecha
-		// 3 izquierda
+		// 0 up
+		// 1 down
+		// 2 right
+		// 3 left
+
 		switch (direccion) {
 		case 0: {
-			if (nuevoMapa[a - 2][b] == 0) {
-				nuevoMapa[a - 1][b] = 4;
-				nuevoMapa[a - 2][b] = 4;
-				a = a - 2;
-				recorrer(a, b, nuevoMapa);
+			try {
+				if (maze[a - 2][b] == Block.free) {
+					maze[a - 1][b] = Block.free;
+					a = a - 2;
+					travel(a, b, maze);
+				}
+			} catch (Exception e) {
 			}
-			recorrer(a, b, nuevoMapa);
+			travel(a, b, maze);
 		}
 		case 1: {
-			if (nuevoMapa[a + 2][b] == 0) {
-				nuevoMapa[a + 1][b] = 4;
-				nuevoMapa[a + 2][b] = 4;
-				a = a + 2;
-				recorrer(a, b, nuevoMapa);
+			try {
+				if (maze[a + 2][b] == Block.free) {
+					maze[a + 1][b] = Block.free;
+					a = a + 2;
+					travel(a, b, maze);
+				}
+			} catch (Exception e) {
 			}
-			recorrer(a, b, nuevoMapa);
+			travel(a, b, maze);
 		}
 		case 2: {
-			if (nuevoMapa[a][b + 2] == 0) {
-				nuevoMapa[a][b + 1] = 4;
-				nuevoMapa[a][b + 1] = 4;
-				b = b + 2;
-				recorrer(a, b, nuevoMapa);
+			try {
+				if (maze[a][b - 2] == Block.free) {
+					maze[a][b - 1] = Block.free;
+					b = b - 2;
+					travel(a, b, maze);
+				}
+			} catch (Exception e) {
 			}
-			recorrer(a, b, nuevoMapa);
+			travel(a, b, maze);
 		}
 		case 3: {
-			if (nuevoMapa[a][b - 2] == 0) {
-				nuevoMapa[a][b - 1] = 4;
-				nuevoMapa[a][b - 2] = 4;
-				b = b - 2;
-				recorrer(a, b, nuevoMapa);
+			try {
+				if (maze[a][b + 2] == Block.free) {
+					maze[a][b + 1] = Block.free;
+					b = b + 2;
+					travel(a, b, maze);
+				}
+			} catch (Exception e) {
 			}
-			recorrer(a, b, nuevoMapa);
+			travel(a, b, maze);
 		}
+
 		}
 	}
-
 }
