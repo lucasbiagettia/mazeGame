@@ -5,10 +5,6 @@ import java.awt.Graphics;
 
 public class Map {
 
-	public static void setTamano(int tamano) {
-		Map.tamano = tamano;
-	}
-
 	public static int tamano;// = VentanaInicio.tamano.getValue();
 	private int fila = 0;
 	private int columna = 0;

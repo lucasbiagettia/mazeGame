@@ -19,8 +19,7 @@ public class Game extends JPanel {
     Character character;
     Enemy bolitaAsesina;
     
-    private static boolean withEnemy = false;
-    private int movements = 0;
+    
     private boolean finished = false;
     private boolean win= false;
     
