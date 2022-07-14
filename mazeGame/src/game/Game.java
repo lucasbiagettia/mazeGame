@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import elements.Character;
 import elements.Enemy;
 import mazeGame.Block;
-import mazeGame.Mapa;
 import mazeGame.MazeGenerator;
 import userInterface.VentanaInicio;
 import userInterface.VentanaSalida;
@@ -20,7 +19,8 @@ public class Game extends JPanel {
 	MazeGenerator mazeGenerator;
     Block[][] maze;
     Character character;
-    Enemy bolitaAsesina;
+    Enemy enemy;
+    Integer movements;
     
     
     private boolean finished = false;
@@ -31,34 +31,32 @@ public class Game extends JPanel {
     	maze = mazeGenerator.getNewMaze();
     	character = new Character();
     	if (MazeGameConfiguration.withEnemy) {
-    		bolitaAsesina = new Enemy();
+    		enemy = new Enemy();
     	}
     }
     
     public void playGame(){
-        maze = MazeGenerator.getMaze();
-        int movimientos = 0;
+        movements = 0;
         
         addKeyListener(new KeyListener(){
-            private String movimientos;
             @Override
             public void keyTyped(KeyEvent e) {
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
-                personaje.teclaPresionada(e);
+                character.teclaPresionada(e);
                 mov++;
                 if (conBolitaAsesina){
-                    bolitaAsesina.movimientoBolita();
+                    enemy.movimientoBolita();
                     
-                    if (bolitaAsesina.x == personaje.x & bolitaAsesina.y == personaje.y){
+                    if (enemy.x == character.x & enemy.y == character.y){
                         perdio = true;
                         termino = true;
                     }
 
                 }
-                if (personaje.x == 40* (mapa.getNumColumnas()-2) && personaje.y == 40* (mapa.getNumFilas()-3)){
+                if (character.x == 40* (mapa.getNumColumnas()-2) && character.y == 40* (mapa.getNumFilas()-3)){
                     conBolitaAsesina = false;
                     perdio = false;
                     termino = true;
@@ -77,10 +75,10 @@ public class Game extends JPanel {
     
     public void paint (Graphics grafico){
         mapa.paint(grafico);
-        personaje.paint(grafico);
+        character.paint(grafico);
         if (conBolitaAsesina){
            int a = 1;
-           bolitaAsesina.paint(grafico, a);
+           enemy.paint(grafico, a);
            a++;
            a = a%10;
     
