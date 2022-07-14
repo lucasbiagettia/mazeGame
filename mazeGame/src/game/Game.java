@@ -15,7 +15,7 @@ import mazeGame.MazeGenerator;
 import userInterface.VentanaInicio;
 import userInterface.VentanaSalida;
 
-public class Game extends JPanel {
+public class Game extends JPanel{
 	MazeGenerator mazeGenerator;
     Block[][] maze;
     Character character;

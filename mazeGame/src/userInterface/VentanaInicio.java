@@ -4,7 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import game.Game;
-import mazeGame.Mapa;
+import game.MazeGameConfiguration;
 
 public class VentanaInicio extends javax.swing.JFrame {
 
@@ -22,7 +22,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 		jButton1 = new javax.swing.JButton();
 		jRadioButton1 = new javax.swing.JRadioButton();
 		jLabel1 = new javax.swing.JLabel();
-		tamano = new javax.swing.JSlider();
+		size = new javax.swing.JSlider();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,12 +42,12 @@ public class VentanaInicio extends javax.swing.JFrame {
 
 		jLabel1.setText("Tamaño del laberinto");
 
-		tamano.setMaximum(10);
-		tamano.setMinimum(1);
-		tamano.setToolTipText("");
-		tamano.setValue(1);
-		tamano.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		tamano.addChangeListener(new javax.swing.event.ChangeListener() {
+		size.setMaximum(10);
+		size.setMinimum(1);
+		size.setToolTipText("");
+		size.setValue(1);
+		size.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+		size.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
 				tamanoStateChanged(evt);
 			}
@@ -63,14 +63,14 @@ public class VentanaInicio extends javax.swing.JFrame {
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
 								.addComponent(jButton1)
 								.addGroup(layout.createSequentialGroup().addComponent(jLabel1).addGap(57, 57, 57))
-								.addComponent(tamano, javax.swing.GroupLayout.Alignment.LEADING,
+								.addComponent(size, javax.swing.GroupLayout.Alignment.LEADING,
 										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addGap(43, 43, 43)));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup().addGap(42, 42, 42).addComponent(jRadioButton1)
 						.addGap(27, 27, 27).addComponent(jLabel1).addGap(18, 18, 18)
-						.addComponent(tamano, javax.swing.GroupLayout.PREFERRED_SIZE,
+						.addComponent(size, javax.swing.GroupLayout.PREFERRED_SIZE,
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(46, 46, 46).addComponent(jButton1)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
@@ -81,7 +81,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButton1ActionPerformed
-		Game.setConBolitaAsesina(true);
+		MazeGameConfiguration.withEnemy = true;
 	}// GEN-LAST:event_jRadioButton1ActionPerformed
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
@@ -91,7 +91,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	private void tamanoStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tamanoStateChanged
-		Mapa.setTamano(this.tamano.getValue()); // TODO add your handling code here:
+		MazeGameConfiguration.size = this.size.getValue();
 	}// GEN-LAST:event_tamanoStateChanged
 
 	public static void main(String args[]) {
@@ -107,7 +107,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 	private javax.swing.JButton jButton1;
 	private javax.swing.JLabel jLabel1;
 	public static javax.swing.JRadioButton jRadioButton1;
-	public static javax.swing.JSlider tamano;
+	public static javax.swing.JSlider size;
 	// End of variables declaration//GEN-END:variables
 
 	void main() {
