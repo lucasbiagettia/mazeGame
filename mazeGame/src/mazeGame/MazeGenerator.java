@@ -1,31 +1,18 @@
 package mazeGame;
 
-import program.MazeConfiguration;
+import game.MazeGameConfiguration;
 
-public class Maze {
-	private static boolean isPresent = false;
-	private static Block[][] maze;
-
-	public static Block[][] getMaze() {
-		if (isPresent = false) {
-			isPresent = true;
-			maze = generateMaze(MazeConfiguration.size);
-			return Maze.getMaze();
-		} else {
-			return maze;
-		}
+public class MazeGenerator {
+		
+	public MazeGenerator() {
 	}
-
-	private Maze(int size) {
-		isPresent = true;
-		maze = generateMaze(size);
-	}
-
+	
 	// TODO tengo que ver como resuelvo esto
 	// Debería generar los bloques originales
-	private static Block[][] generateMaze(int size) {
-		int height = size * 2 + 7;
-		int width = size * 2 + 17;
+	public Block[][] getNewMaze() {
+		Block[][] maze;
+		int height = MazeGameConfiguration.columns; 
+		int width = MazeGameConfiguration.rows;
 		maze = new Block[height][width];
 
 		for (int i = 0; i < height; i++) {
@@ -49,16 +36,13 @@ public class Maze {
 				}
 			}
 		}
+		travel (2,2, maze);
 		return maze;
 //		ver como se hace el travel;
 	}
 
 	// Este algoritmo recive el mapaBase y lo "limpia usando la función recursiva
 	// travel
-	private void generate(int a, int b, Block[][] maze) {
-		// Ver si es necesario
-
-	}
 
 	private void travel(int a, int b, Block[][] maze) {
 		if (maze[a - 1][b] == Block.free || maze[a + 1][b] == Block.free || maze[a][b - 1] == Block.free

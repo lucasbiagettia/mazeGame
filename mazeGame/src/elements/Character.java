@@ -3,11 +3,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-import mazeGame.Maze;
+import mazeGame.MazeGenerator;
 
 public class Character {
 //    Mapa lab = new Mapa();
-    int [][] laberinto = Maze.getLaberinto();
+    int [][] laberinto = MazeGenerator.getLaberinto();
     public int x = 80;
     public int y = 80;
     private final int ancho = 40;

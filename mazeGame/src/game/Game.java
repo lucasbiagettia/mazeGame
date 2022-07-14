@@ -4,18 +4,21 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import elements.Enemy;
 import elements.Character;
+import elements.Enemy;
+import mazeGame.Block;
 import mazeGame.Mapa;
+import mazeGame.MazeGenerator;
+import userInterface.VentanaInicio;
+import userInterface.VentanaSalida;
 
 public class Game extends JPanel {
-
-    Map map;
-    Maze maze;
+	MazeGenerator mazeGenerator;
+    Block[][] maze;
     Character character;
     Enemy bolitaAsesina;
     
@@ -23,18 +26,17 @@ public class Game extends JPanel {
     private boolean finished = false;
     private boolean win= false;
     
-    Game game (int height, int width) {
-    	map = new Map(height, width);
-    	maze = new Maze(map);
-    	character = new Character(map)
-    	if (withEnemy) {
-    		withEnemy = true;
-    		enemy = new Enemy (map);
+    public Game() {
+    	mazeGenerator = new MazeGenerator();
+    	maze = mazeGenerator.getNewMaze();
+    	character = new Character();
+    	if (MazeGameConfiguration.withEnemy) {
+    		bolitaAsesina = new Enemy();
     	}
     }
     
-    public Game(){
-        
+    public void playGame(){
+        maze = MazeGenerator.getMaze();
         int movimientos = 0;
         
         addKeyListener(new KeyListener(){

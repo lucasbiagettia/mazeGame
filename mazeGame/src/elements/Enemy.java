@@ -3,13 +3,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import mazeGame.Mapa;
-import mazeGame.Maze;
+import mazeGame.MazeGenerator;
 
 
 public class Enemy {
 //    Mapa lab = new Mapa();
     
-    int [][] laberinto = Maze.getLaberinto();
+    int [][] laberinto = MazeGenerator.getLaberinto();
     public int x = 40* (lab.getNumColumnas()-3);
     public int y = 40* (lab.getNumFilas() -3);
     private final int ancho = 40;
