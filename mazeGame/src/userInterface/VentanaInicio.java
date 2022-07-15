@@ -86,8 +86,6 @@ public class VentanaInicio extends javax.swing.JFrame {
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		// Juego.inicioJuego(); // TODO add your handling code here:
-		Game.setInicioAbierta(false);
-
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	private void tamanoStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tamanoStateChanged

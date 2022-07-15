@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import mazeGame.MazeGenerator;
 
 public class Character {
-//    Mapa lab = new Mapa();
-    int [][] laberinto = MazeGenerator.getLaberinto();
     public int x = 80;
     public int y = 80;
     private final int ancho = 40;
@@ -23,29 +21,18 @@ public class Character {
         
     }
     
-    public void teclaPresionada(KeyEvent evento){
-        //laberinto = lab.mapa(laberinto);
-        if(evento.getKeyCode()== 37){//Izquierda 
-            if(laberinto[y/40][(x/40)-1]==4 ||laberinto[y/40][(x/40)-1] == 15 ){
-                x -= mov;
-            }
-        }
-        if(evento.getKeyCode()== 39){//Derecha 
-            if(laberinto[y/40][(x/40)+1]==4 ||laberinto[y/40][(x/40)+1]==15){
-                x += mov;
-            }
-        }
-        if(evento.getKeyCode()== 40){//Abajo
-            if(laberinto[(y/40)+1][(x/40)]==4 || laberinto[(y/40)+1][(x/40)]==15){
-                y += mov;
-            }
-        }
-        if(evento.getKeyCode()== 38){//Arriba
-            if(laberinto[(y/40)-1][(x/40)]==4 || laberinto[(y/40)-1][(x/40)]==15){
-                y -= mov;
-        }
-        }
-                
+    public Direction teclaPresionada(Integer evento){
+        switch (evento) {
+    	case 37:
+    		return Direction.left;
+    	case 38:
+    		return Direction.up;
+    	case 39:
+    		return Direction.rigth;
+    	case 40:
+    		return Direction.down;
+    	default:
+    		return null;
+    	}
     }
-    
 }
