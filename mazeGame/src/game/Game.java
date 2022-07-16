@@ -12,10 +12,11 @@ import elements.Character;
 import elements.Enemy;
 import mazeGame.Block;
 import mazeGame.MazeGenerator;
+import userInterface.IKeyboardObserver;
 import userInterface.VentanaInicio;
 import userInterface.VentanaSalida;
 
-public class Game extends JPanel{
+public class Game implements IKeyboardObserver{
 	MazeGenerator mazeGenerator;
     Block[][] maze;
     Character character;
@@ -126,4 +127,12 @@ public class Game extends JPanel{
         VentanaSalida.main(args);
         
     }
+
+	@Override
+	public void receiveEvent(int keyCode) {
+		// TODO enviar eventos a todos los componentes
+		
+		// TODO Auto-generated method stub
+		
+	}
 }
