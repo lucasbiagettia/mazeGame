@@ -2,34 +2,29 @@ package elements;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import mazeGame.Mapa;
 import mazeGame.MazeGenerator;
 
 
 public class Enemy {
 //    Mapa lab = new Mapa();
     
-    int [][] laberinto = MazeGenerator.getLaberinto();
-    public int x = 40* (lab.getNumColumnas()-3);
-    public int y = 40* (lab.getNumFilas() -3);
     private final int ancho = 40;
     private final int alto  = 40;
     private final int mov   = 40;
     
-    
-    public void paint (Graphics grafico, int rand){
-        grafico.setColor(Color.yellow);
-        grafico.fillOval(x, y, ancho, alto);
-        grafico.setColor(Color.black);
-        grafico.drawOval(x, y, ancho, alto);
-        int random = (int)(Math.random()*20);
-            if (random%20 == 0){
-            this.movimientoBolita();
-        }
-        
-        
-        
-    }
+//    el enemigo no se deberìa pintar él mismo sino game
+//    public void paint (Graphics grafico, int rand){
+//        grafico.setColor(Color.yellow);
+//        grafico.fillOval(x, y, ancho, alto);
+//        grafico.setColor(Color.black);
+//        grafico.drawOval(x, y, ancho, alto);
+//        int random = (int)(Math.random()*20);
+//            if (random%20 == 0){
+//            this.movimientoBolita();
+//        }
+//              
+//        
+//    }
     
     public void movimientoBolita(){
         
@@ -71,10 +66,6 @@ public class Enemy {
                 }
                 break;
         }
-    }
-
-    void paint() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 
