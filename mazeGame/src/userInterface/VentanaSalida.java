@@ -41,15 +41,15 @@ public class VentanaSalida extends javax.swing.JFrame {
             }
         });
 
-        if(Game.perdio){
-            jLabel1.setText("Perdiste despues de "+Game.mov+" movimientos");
-            Game.perdio=false;
-        }
-        else{
-            jLabel1.setText("Ganaste despues de "+Game.mov+" movimientos"
-            );
-            Game.perdio = false;
-        }
+//        if(Game.perdio){
+//            jLabel1.setText("Perdiste despues de "+Game.mov+" movimientos");
+//            Game.perdio=false;
+//        }
+//        else{
+//            jLabel1.setText("Ganaste despues de "+Game.mov+" movimientos"
+//            );
+//            Game.perdio = false;
+//        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,9 +83,6 @@ public class VentanaSalida extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -6,5 +6,6 @@ public class MazeGameConfiguration{
 	public static int columns = size * 2 + 17; 
 	public static boolean withEnemy = false;
     public static int movements = 0;
+    public static int blockDimension = 40;
     
 }
