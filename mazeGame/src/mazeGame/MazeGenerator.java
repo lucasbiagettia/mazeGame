@@ -45,8 +45,9 @@ public class MazeGenerator {
 	// travel
 
 	private void travel(int a, int b, Block[][] maze) {
-		if (maze[a - 1][b] == Block.free || maze[a + 1][b] == Block.free || maze[a][b - 1] == Block.free
-				|| maze[a][b + 2] == Block.free) {
+		// TODO de esta verificacion
+		if (!(maze[a - 1][b] == Block.free || maze[a + 1][b] == Block.free || maze[a][b - 1] == Block.free
+				|| maze[a][b + 1] == Block.free)) {
 
 			int direccion = (int) (Math.random() * 4);
 			// 0 up
@@ -65,6 +66,7 @@ public class MazeGenerator {
 				} catch (Exception e) {
 				}
 				travel(a, b, maze);
+				break;
 			}
 			case 1: {
 				try {
@@ -76,6 +78,7 @@ public class MazeGenerator {
 				} catch (Exception e) {
 				}
 				travel(a, b, maze);
+				break;
 			}
 			case 2: {
 				try {
@@ -87,6 +90,7 @@ public class MazeGenerator {
 				} catch (Exception e) {
 				}
 				travel(a, b, maze);
+				break;
 			}
 			case 3: {
 				try {
@@ -98,9 +102,12 @@ public class MazeGenerator {
 				} catch (Exception e) {
 				}
 				travel(a, b, maze);
+				break;
 			}
 
 			}
+		}else {
+			return;
 		}
 	}
 }
