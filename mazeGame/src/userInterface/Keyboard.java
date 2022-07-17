@@ -5,12 +5,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class Keyboard extends Component implements KeyListener, IKeyboardSender{
+public class Keyboard  implements KeyListener, IKeyboardSender{
     IKeyboardObserver observer;
 	
     public Keyboard(IKeyboardObserver theObserver) {
     	observer=theObserver;
-    	setFocusable(true);
     }
     
     

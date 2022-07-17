@@ -1,12 +1,8 @@
 package game;
-import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 
 import elements.Character;
 import elements.Enemy;
@@ -14,125 +10,74 @@ import mazeGame.Block;
 import mazeGame.MazeGenerator;
 import userInterface.IKeyboardObserver;
 import userInterface.VentanaInicio;
-import userInterface.VentanaSalida;
 
-public class Game implements IKeyboardObserver{
+public class Game extends Component implements IKeyboardObserver {
 	MazeGenerator mazeGenerator;
-    Block[][] maze;
-    Character character;
-    Enemy enemy;
-    Integer movements;
-    
-    
-    private boolean finished = false;
-    private boolean win= false;
-    
-    public Game() {
-    	mazeGenerator = new MazeGenerator();
-    	maze = mazeGenerator.getNewMaze();
-    	character = new Character();
-    	if (MazeGameConfiguration.withEnemy) {
-    		enemy = new Enemy();
-    	}
-    }
-    
-    public void playGame(){
-        movements = 0;
-        
-        addKeyListener(new KeyListener(){
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
+	Block[][] maze;
+	Character character;
+	Enemy enemy;
+	Integer movements;
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                character.teclaPresionada(e);
-                mov++;
-                if (conBolitaAsesina){
-                    enemy.movimientoBolita();
-                    
-                    if (enemy.x == character.x & enemy.y == character.y){
-                        perdio = true;
-                        termino = true;
-                    }
+	public Game() {
+		mazeGenerator = new MazeGenerator();
+		maze = mazeGenerator.getNewMaze();
+		character = new Character();
+		if (MazeGameConfiguration.withEnemy) {
+			enemy = new Enemy();
+		}
+		setFocusable(true);
+	}
 
-                }
-                if (character.x == 40* (mapa.getNumColumnas()-2) && character.y == 40* (mapa.getNumFilas()-3)){
-                    conBolitaAsesina = false;
-                    perdio = false;
-                    termino = true;
-                }
+	public void playGame() {
+		movements = 0;
 
-            }
+	}
 
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
-        
-        setFocusable(true);
-        
-    }
-    
-    public void paint (Graphics grafico){
-        mapa.paint(grafico);
-        character.paint(grafico);
-        if (conBolitaAsesina){
-           int a = 1;
-           enemy.paint(grafico, a);
-           a++;
-           a = a%10;
-    
-        }
-    }
+	public void paint(Graphics graphics) {
+		paintMaze(graphics);
+		character.paint(graphics, 2, 2);
+		if (enemy != null) {
+			enemy.paint(graphics, 6, 6);
+		}
+	}
 
-    public static void main(String[] args){
-        VentanaInicio.main(args);
-        
-        while (inicioAbierta){
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-        
-        
-        
-        JFrame ventana = new JFrame ("Primer laberinto");
-        Game game = new Game();
-        
-        ventana.add(game);
-        int alto = (Mapa.tamano )*2+7; //Mapa.getNumFilas();
-        int ancho = (Mapa.tamano )*2+17; //Mapa.getNumColumnas();
-        
-        
-        ventana.setSize(ancho*40,(alto +1)*40);
-        ventana.setLocation(300,200);
-        ventana.setVisible(true);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   
-        
-        
-        while(!termino){
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            ventana.repaint();
-        }
-        VentanaSalida.main(args);
-        
-    }
+	public void paintMaze(Graphics graphics) {
+		int height = MazeGameConfiguration.columns;
+		int width = MazeGameConfiguration.rows;
+		int dimension = MazeGameConfiguration.blockDimension;
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				switch (maze[i][j]) {
+				case free:
+					graphics.setColor(Color.white);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+				case wall:
+					graphics.setColor(Color.blue);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+				case permanentWall:
+					graphics.setColor(Color.blue);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+				case end:
+					graphics.setColor(Color.white);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		VentanaInicio.main(args);
+	}
 
 	@Override
 	public void receiveEvent(int keyCode) {
 		// TODO enviar eventos a todos los componentes
-		
+
 		// TODO Auto-generated method stub
-		
+
 	}
 }
