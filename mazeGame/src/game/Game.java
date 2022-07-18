@@ -20,7 +20,7 @@ public class Game extends Component implements IKeyboardObserver {
 
 	public Game() {
 		mazeGenerator = new MazeGenerator();
-		maze = mazeGenerator.getNewMaze();
+		maze = mazeGenerator.generarMapa();
 		character = new Character();
 		if (MazeGameConfiguration.withEnemy) {
 			enemy = new Enemy();
@@ -64,6 +64,25 @@ public class Game extends Component implements IKeyboardObserver {
 					graphics.setColor(Color.white);
 					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
 					break;
+				
+				case type0:
+					graphics.setColor(Color.white);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+				case type1:
+					graphics.setColor(Color.blue);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+				case type2:
+					graphics.setColor(Color.red);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+				case type4:
+					graphics.setColor(Color.green);
+					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+					break;
+					
+					
 				}
 			}
 		}

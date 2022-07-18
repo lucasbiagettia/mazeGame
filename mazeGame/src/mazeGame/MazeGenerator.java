@@ -46,7 +46,6 @@ public class MazeGenerator {
 	// travel
 	private Boolean verifyEnd(int a, int b, Block[][] maze) {
 		int countFree = 0;
-
 		if (maze[a - 1][b] == Block.free)
 			countFree++;
 		if (maze[a + 1][b] == Block.free)
@@ -55,7 +54,7 @@ public class MazeGenerator {
 			countFree++;
 		if (maze[a][b + 1] == Block.free)
 			countFree++;
-		return countFree >=3;
+		return countFree >= 3;
 	}
 
 	private void travel(int a, int b, Block[][] maze) {
@@ -124,4 +123,102 @@ public class MazeGenerator {
 			}
 		}
 	}
+
+	// ACA EMPIEZA
+	public static Block[][] generarMapa() {
+
+		Block[][] nuevoMapa;
+		int a = MazeGameConfiguration.columns;
+		int b = MazeGameConfiguration.rows;
+		nuevoMapa = new Block[a][b];
+
+		for (int i = 0; i < a; i++) {
+			for (int j = 0; j < b; j++) {
+				nuevoMapa[i][j] = Block.type0;
+				if (j == 0 || j == b - 1 || i == 0 || i == a - 1) {
+					nuevoMapa[i][j] = Block.type1;
+				}
+				if (i % 2 == 1 && j % 2 == 1) {
+					nuevoMapa[i][j] = Block.type2;
+				}
+				if (i == (a - 2) && j == (b - 2)) {
+					nuevoMapa[i][j] = Block.type3;
+				}
+			}
+		}
+
+		generar(1, 1, nuevoMapa);
+		return nuevoMapa;
+	}
+
+	private static void generar(int a, int b, Block[][] nuevoMapa) {
+		int direccion = (int) (Math.random() * 4);
+		nuevoMapa[a][b] = Block.type4;
+
+		// 4 es free
+		recorrer(a, b, nuevoMapa);
+
+	}
+
+	private static void recorrer(int a, int b, Block[][] nuevoMapa) {
+		if (verificarVacios(a, b, nuevoMapa)) {
+			int direccion = (int) (Math.random() * 4);
+			// 0 arriba
+			// 1 abajo
+			// 2 derecha
+			// 3 izquierda
+			try {
+				switch (direccion) {
+				case 0: {
+					if (nuevoMapa[a - 2][b] == Block.type0) {
+						nuevoMapa[a - 1][b] = Block.type4;
+						nuevoMapa[a - 2][b] = Block.type4;
+						a = a - 2;
+						recorrer(a, b, nuevoMapa);
+					}
+				}
+				case 1: {
+					if (nuevoMapa[a + 2][b] == Block.type0) {
+						nuevoMapa[a + 1][b] = Block.type4;
+						nuevoMapa[a + 2][b] = Block.type4;
+						a = a + 2;
+					}
+				}
+				case 2: {
+					if (nuevoMapa[a][b + 2] == Block.type0) {
+						nuevoMapa[a][b + 1] = Block.type4;
+						nuevoMapa[a][b + 1] = Block.type4;
+						b = b + 2;
+						recorrer(a, b, nuevoMapa);
+					}
+				}
+				case 3: {
+					if (nuevoMapa[a][b - 2] == Block.type0) {
+						nuevoMapa[a][b - 1] = Block.type4;
+						nuevoMapa[a][b - 2] = Block.type4;
+						b = b - 2;
+						recorrer(a, b, nuevoMapa);
+					}
+				}
+				}
+			} catch (Exception e) {
+				
+			}
+			recorrer(a, b, nuevoMapa);
+		}
+	}
+
+	private static boolean verificarVacios(int a, int b, Block[][] nuevoMapa) {
+		boolean result = true;
+		try {
+		result = nuevoMapa[a + 2][b] == Block.type0 || nuevoMapa[a - 2][b] == Block.type0 ||
+
+				nuevoMapa[a][b + 2] == Block.type0 || nuevoMapa[a][b - 2] == Block.type0;
+	
+		}catch (Exception e) {
+			
+		}
+		return result;
+	}
+
 }
