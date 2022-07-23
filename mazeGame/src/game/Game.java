@@ -1,5 +1,6 @@
 package game;
 
+import robado.MazeGenerator2;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -12,15 +13,15 @@ import userInterface.IKeyboardObserver;
 import userInterface.VentanaInicio;
 
 public class Game extends Component implements IKeyboardObserver {
-	MazeGenerator mazeGenerator;
+	MazeGenerator2 mazeGenerator;
 	Block[][] maze;
 	Character character;
 	Enemy enemy;
 	Integer movements;
 
 	public Game() {
-		mazeGenerator = new MazeGenerator();
-		maze = mazeGenerator.generarMapa();
+		mazeGenerator = new MazeGenerator2(20);
+		maze = mazeGenerator.maze2blockMaze();
 		character = new Character();
 		if (MazeGameConfiguration.withEnemy) {
 			enemy = new Enemy();
