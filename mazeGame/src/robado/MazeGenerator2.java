@@ -19,10 +19,10 @@ public class MazeGenerator2 {
     	for (int i = 0 ; i < dimension ; i ++) {
     		for (int j = 0 ; j < dimension ; j ++) {
     			if (maze [i][j] == 1) {
-    				blockMaze [i][j] = Block.wall;
+    				blockMaze [i][j] = Block.WALL;
     			}
     			else {
-    				blockMaze [i][j] = Block.free;
+    				blockMaze [i][j] = Block.FREE;
     			}
     		}
     	}

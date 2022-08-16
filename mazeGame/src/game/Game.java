@@ -49,19 +49,19 @@ public class Game extends Component implements IKeyboardObserver {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				switch (maze[i][j]) {
-				case free:
+				case FREE:
 					graphics.setColor(Color.white);
 					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
 					break;
-				case wall:
+				case WALL:
 					graphics.setColor(Color.blue);
 					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
 					break;
-				case permanentWall:
+				case PERMANENT_WALL:
 					graphics.setColor(Color.blue);
 					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
 					break;
-				case end:
+				case END:
 					graphics.setColor(Color.white);
 					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
 					break;

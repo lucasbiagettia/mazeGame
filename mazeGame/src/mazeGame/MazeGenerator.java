@@ -18,22 +18,22 @@ public class MazeGenerator {
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				maze[i][j] = Block.wall;
+				maze[i][j] = Block.WALL;
 
 				if (i % 2 == 1 && j % 2 == 1) {
-					maze[i][j] = Block.free;
+					maze[i][j] = Block.FREE;
 				}
 
 				if (i == height - 1 && j == width - 1) {
-					maze[i][j] = Block.end;
+					maze[i][j] = Block.END;
 				}
 
 				if (i % 2 == 0 && j % 2 == 0) {
-					maze[i][j] = Block.permanentWall;
+					maze[i][j] = Block.PERMANENT_WALL;
 				}
 
 				if (i == 0 || j == 0 || i == height || j == width) {
-					maze[i][j] = Block.permanentWall;
+					maze[i][j] = Block.PERMANENT_WALL;
 				}
 			}
 		}
@@ -46,13 +46,13 @@ public class MazeGenerator {
 	// travel
 	private Boolean verifyEnd(int a, int b, Block[][] maze) {
 		int countFree = 0;
-		if (maze[a - 1][b] == Block.free)
+		if (maze[a - 1][b] == Block.FREE)
 			countFree++;
-		if (maze[a + 1][b] == Block.free)
+		if (maze[a + 1][b] == Block.FREE)
 			countFree++;
-		if (maze[a][b - 1] == Block.free)
+		if (maze[a][b - 1] == Block.FREE)
 			countFree++;
-		if (maze[a][b + 1] == Block.free)
+		if (maze[a][b + 1] == Block.FREE)
 			countFree++;
 		return countFree >= 3;
 	}
@@ -70,8 +70,8 @@ public class MazeGenerator {
 			switch (direccion) {
 			case 0: {
 				try {
-					if (maze[a - 2][b] == Block.free) {
-						maze[a - 1][b] = Block.free;
+					if (maze[a - 2][b] == Block.FREE) {
+						maze[a - 1][b] = Block.FREE;
 						a = a - 2;
 						travel(a, b, maze);
 					}
@@ -83,8 +83,8 @@ public class MazeGenerator {
 			}
 			case 1: {
 				try {
-					if (maze[a + 2][b] == Block.free) {
-						maze[a + 1][b] = Block.free;
+					if (maze[a + 2][b] == Block.FREE) {
+						maze[a + 1][b] = Block.FREE;
 						a = a + 2;
 						travel(a, b, maze);
 					}
@@ -96,8 +96,8 @@ public class MazeGenerator {
 			}
 			case 2: {
 				try {
-					if (maze[a][b - 2] == Block.free) {
-						maze[a][b - 1] = Block.free;
+					if (maze[a][b - 2] == Block.FREE) {
+						maze[a][b - 1] = Block.FREE;
 						b = b - 2;
 						travel(a, b, maze);
 					}
@@ -109,8 +109,8 @@ public class MazeGenerator {
 			}
 			case 3: {
 				try {
-					if (maze[a][b + 2] == Block.free) {
-						maze[a][b + 1] = Block.free;
+					if (maze[a][b + 2] == Block.FREE) {
+						maze[a][b + 1] = Block.FREE;
 						b = b + 2;
 						travel(a, b, maze);
 					}
