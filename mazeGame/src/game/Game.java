@@ -1,26 +1,25 @@
 package game;
 
-import robado.MazeGenerator2;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 
 import elements.Character;
 import elements.Enemy;
-import mazeGame.Block;
-import mazeGame.MazeGenerator;
+import maze_generator.Block;
+import maze_generator.MazeGenerator;
 import userInterface.IKeyboardObserver;
 import userInterface.VentanaInicio;
 
 public class Game extends Component implements IKeyboardObserver {
-	MazeGenerator2 mazeGenerator;
+	MazeGenerator mazeGenerator;
 	Block[][] maze;
 	Character character;
 	Enemy enemy;
 	Integer movements;
 
 	public Game() {
-		mazeGenerator = new MazeGenerator2(20);
+		mazeGenerator = new MazeGenerator();
 		maze = mazeGenerator.maze2blockMaze();
 		character = new Character();
 		if (MazeGameConfiguration.withEnemy) {

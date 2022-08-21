@@ -1,4 +1,4 @@
-package mazeGame;
+package maze_generator;
 
 import game.MazeGameConfiguration;
 
