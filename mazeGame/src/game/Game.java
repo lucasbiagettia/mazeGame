@@ -19,8 +19,8 @@ public class Game extends Component implements IKeyboardObserver {
 	Integer movements;
 
 	public Game() {
-		mazeGenerator = new MazeGenerator();
-		maze = mazeGenerator.maze2blockMaze();
+		mazeGenerator = new MazeGenerator(14);
+		maze = mazeGenerator.getMaze();
 		character = new Character();
 		if (MazeGameConfiguration.withEnemy) {
 			enemy = new Enemy();

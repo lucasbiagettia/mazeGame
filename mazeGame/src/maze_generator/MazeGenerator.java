@@ -1,224 +1,84 @@
 package maze_generator;
 
-import game.MazeGameConfiguration;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Stack;
 
 public class MazeGenerator {
-	int count = 0;
 
-	public MazeGenerator() {
+	private Stack<Node> stack = new Stack<>();
+	private Random rand = new Random();
+	private int[][] maze;
+	private int dimension;
+
+	public MazeGenerator(int dim) {
+		maze = new int[dim][dim];
+		dimension = dim;
 	}
 
-	// TODO tengo que ver como resuelvo esto
-	// Debería generar los bloques originales
-	public Block[][] getNewMaze() {
-		Block[][] maze;
-		int height = MazeGameConfiguration.columns;
-		int width = MazeGameConfiguration.rows;
-		maze = new Block[height][width];
-
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				maze[i][j] = Block.WALL;
-
-				if (i % 2 == 1 && j % 2 == 1) {
-					maze[i][j] = Block.FREE;
-				}
-
-				if (i == height - 1 && j == width - 1) {
-					maze[i][j] = Block.END;
-				}
-
-				if (i % 2 == 0 && j % 2 == 0) {
-					maze[i][j] = Block.PERMANENT_WALL;
-				}
-
-				if (i == 0 || j == 0 || i == height || j == width) {
-					maze[i][j] = Block.PERMANENT_WALL;
-				}
-			}
-		}
-		travel(1, 1, maze);
-		return maze;
-//		ver como se hace el travel;
-	}
-
-	// Este algoritmo recive el mapaBase y lo "limpia usando la función recursiva
-	// travel
-	private Boolean verifyEnd(int a, int b, Block[][] maze) {
-		int countFree = 0;
-		if (maze[a - 1][b] == Block.FREE)
-			countFree++;
-		if (maze[a + 1][b] == Block.FREE)
-			countFree++;
-		if (maze[a][b - 1] == Block.FREE)
-			countFree++;
-		if (maze[a][b + 1] == Block.FREE)
-			countFree++;
-		return countFree >= 3;
-	}
-
-	private void travel(int a, int b, Block[][] maze) {
-		count++;
-		// TODO de esta verificacion
-		if (!verifyEnd(a, b, maze)) {
-			int direccion = (int) (Math.random() * 4);
-			// 0 up
-			// 1 down
-			// 2 right
-			// 3 left
-
-			switch (direccion) {
-			case 0: {
-				try {
-					if (maze[a - 2][b] == Block.FREE) {
-						maze[a - 1][b] = Block.FREE;
-						a = a - 2;
-						travel(a, b, maze);
-					}
-				} catch (Exception e) {
-					System.out.println("Exception");
-				}
-				travel(a, b, maze);
-				break;
-			}
-			case 1: {
-				try {
-					if (maze[a + 2][b] == Block.FREE) {
-						maze[a + 1][b] = Block.FREE;
-						a = a + 2;
-						travel(a, b, maze);
-					}
-				} catch (Exception e) {
-					System.out.println("Exception");
-				}
-				travel(a, b, maze);
-				break;
-			}
-			case 2: {
-				try {
-					if (maze[a][b - 2] == Block.FREE) {
-						maze[a][b - 1] = Block.FREE;
-						b = b - 2;
-						travel(a, b, maze);
-					}
-				} catch (Exception e) {
-					System.out.println("Exception");
-				}
-				travel(a, b, maze);
-				break;
-			}
-			case 3: {
-				try {
-					if (maze[a][b + 2] == Block.FREE) {
-						maze[a][b + 1] = Block.FREE;
-						b = b + 2;
-						travel(a, b, maze);
-					}
-				} catch (Exception e) {
-					System.out.println("Exception");
-				}
-				travel(a, b, maze);
-				break;
-			}
+	public void generateMaze() {
+		stack.push(new Node(0, 0));
+		while (!stack.empty()) {
+			Node next = stack.pop();
+			if (validNextNode(next)) {
+				maze[next.y][next.x] = 1;
+				ArrayList<Node> neighbors = findNeighbors(next);
+				randomlyAddNodesToStack(neighbors);
 			}
 		}
 	}
 
-	// ACA EMPIEZA
-	public static Block[][] generarMapa() {
+	public Block[][] getMaze() {
+		Block[][] blockMaze = new Block[dimension][dimension];
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				blockMaze[i][j] = maze[i][j] == 1 ? Block.WALL : Block.FREE;
+			}
+		}
+		return blockMaze;
+	}
 
-		Block[][] nuevoMapa;
-		int a = MazeGameConfiguration.columns;
-		int b = MazeGameConfiguration.rows;
-		nuevoMapa = new Block[a][b];
-
-		for (int i = 0; i < a; i++) {
-			for (int j = 0; j < b; j++) {
-				nuevoMapa[i][j] = Block.type0;
-				if (j == 0 || j == b - 1 || i == 0 || i == a - 1) {
-					nuevoMapa[i][j] = Block.type1;
-				}
-				if (i % 2 == 1 && j % 2 == 1) {
-					nuevoMapa[i][j] = Block.type2;
-				}
-				if (i == (a - 2) && j == (b - 2)) {
-					nuevoMapa[i][j] = Block.type3;
+	private boolean validNextNode(Node node) {
+		int numNeighboringOnes = 0;
+		for (int y = node.y - 1; y < node.y + 2; y++) {
+			for (int x = node.x - 1; x < node.x + 2; x++) {
+				if (pointOnGrid(x, y) && pointNotNode(node, x, y) && maze[y][x] == 1) {
+					numNeighboringOnes++;
 				}
 			}
 		}
-
-		generar(1, 1, nuevoMapa);
-		return nuevoMapa;
+		return (numNeighboringOnes < 3) && maze[node.y][node.x] != 1;
 	}
 
-	private static void generar(int a, int b, Block[][] nuevoMapa) {
-		int direccion = (int) (Math.random() * 4);
-		nuevoMapa[a][b] = Block.type4;
-
-		// 4 es free
-		recorrer(a, b, nuevoMapa);
-
+	private void randomlyAddNodesToStack(ArrayList<Node> nodes) {
+		int targetIndex;
+		while (!nodes.isEmpty()) {
+			targetIndex = rand.nextInt(nodes.size());
+			stack.push(nodes.remove(targetIndex));
+		}
 	}
 
-	private static void recorrer(int a, int b, Block[][] nuevoMapa) {
-		if (verificarVacios(a, b, nuevoMapa)) {
-			int direccion = (int) (Math.random() * 4);
-			// 0 arriba
-			// 1 abajo
-			// 2 derecha
-			// 3 izquierda
-			try {
-				switch (direccion) {
-				case 0: {
-					if (nuevoMapa[a - 2][b] == Block.type0) {
-						nuevoMapa[a - 1][b] = Block.type4;
-						nuevoMapa[a - 2][b] = Block.type4;
-						a = a - 2;
-						recorrer(a, b, nuevoMapa);
-					}
+	private ArrayList<Node> findNeighbors(Node node) {
+		ArrayList<Node> neighbors = new ArrayList<>();
+		for (int y = node.y - 1; y < node.y + 2; y++) {
+			for (int x = node.x - 1; x < node.x + 2; x++) {
+				if (pointOnGrid(x, y) && pointNotCorner(node, x, y) && pointNotNode(node, x, y)) {
+					neighbors.add(new Node(x, y));
 				}
-				case 1: {
-					if (nuevoMapa[a + 2][b] == Block.type0) {
-						nuevoMapa[a + 1][b] = Block.type4;
-						nuevoMapa[a + 2][b] = Block.type4;
-						a = a + 2;
-					}
-				}
-				case 2: {
-					if (nuevoMapa[a][b + 2] == Block.type0) {
-						nuevoMapa[a][b + 1] = Block.type4;
-						nuevoMapa[a][b + 1] = Block.type4;
-						b = b + 2;
-						recorrer(a, b, nuevoMapa);
-					}
-				}
-				case 3: {
-					if (nuevoMapa[a][b - 2] == Block.type0) {
-						nuevoMapa[a][b - 1] = Block.type4;
-						nuevoMapa[a][b - 2] = Block.type4;
-						b = b - 2;
-						recorrer(a, b, nuevoMapa);
-					}
-				}
-				}
-			} catch (Exception e) {
-				
 			}
-			recorrer(a, b, nuevoMapa);
 		}
+		return neighbors;
 	}
 
-	private static boolean verificarVacios(int a, int b, Block[][] nuevoMapa) {
-		boolean result = true;
-		try {
-		result = nuevoMapa[a + 2][b] == Block.type0 || nuevoMapa[a - 2][b] == Block.type0 ||
-
-				nuevoMapa[a][b + 2] == Block.type0 || nuevoMapa[a][b - 2] == Block.type0;
-	
-		}catch (Exception e) {
-			
-		}
-		return result;
+	private Boolean pointOnGrid(int x, int y) {
+		return x >= 0 && y >= 0 && x < dimension && y < dimension;
 	}
 
+	private Boolean pointNotCorner(Node node, int x, int y) {
+		return (x == node.x || y == node.y);
+	}
+
+	private Boolean pointNotNode(Node node, int x, int y) {
+		return !(x == node.x && y == node.y);
+	}
 }

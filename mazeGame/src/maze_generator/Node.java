@@ -1,4 +1,4 @@
-package robado;
+package maze_generator;
 public class Node {
     public final int x;
     public final int y;
