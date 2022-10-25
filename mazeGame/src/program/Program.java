@@ -4,12 +4,21 @@ import javax.swing.JFrame;
 
 import game.Game;
 import game.MazeGameConfiguration;
+import maze_generator.Block;
 import maze_generator.MazeGenerator;
 
 public class Program {
 
 	public static void main(String[] args) {
 		MazeGenerator mazeGenerator = new MazeGenerator(14);
+		mazeGenerator.generateMaze();
+		Block[][] maze = mazeGenerator.getMaze();
+		for (Block[] blocks : maze) {
+			for (Block blocks2 : blocks) {
+				System.out.print(blocks2 + "  ");
+			}
+			System.out.println(blocks);
+		}
 
 		JFrame gameWindow = new JFrame("Primer laberinto");
 		Game game = new Game();

@@ -8,11 +8,11 @@ public class MazeGenerator {
 
 	private Stack<Node> stack = new Stack<>();
 	private Random rand = new Random();
-	private int[][] maze;
+	private Block[][] maze;
 	private int dimension;
 
 	public MazeGenerator(int dim) {
-		maze = new int[dim][dim];
+		maze = new Block[dim][dim];
 		dimension = dim;
 	}
 
@@ -21,7 +21,7 @@ public class MazeGenerator {
 		while (!stack.empty()) {
 			Node next = stack.pop();
 			if (validNextNode(next)) {
-				maze[next.y][next.x] = 1;
+				maze[next.y][next.x] = Block.WALL;
 				ArrayList<Node> neighbors = findNeighbors(next);
 				randomlyAddNodesToStack(neighbors);
 			}
@@ -29,25 +29,19 @@ public class MazeGenerator {
 	}
 
 	public Block[][] getMaze() {
-		Block[][] blockMaze = new Block[dimension][dimension];
-		for (int i = 0; i < dimension; i++) {
-			for (int j = 0; j < dimension; j++) {
-				blockMaze[i][j] = maze[i][j] == 1 ? Block.WALL : Block.FREE;
-			}
-		}
-		return blockMaze;
+		return maze;
 	}
 
 	private boolean validNextNode(Node node) {
 		int numNeighboringOnes = 0;
 		for (int y = node.y - 1; y < node.y + 2; y++) {
 			for (int x = node.x - 1; x < node.x + 2; x++) {
-				if (pointOnGrid(x, y) && pointNotNode(node, x, y) && maze[y][x] == 1) {
+				if (pointOnGrid(x, y) && pointNotNode(node, x, y) && maze[y][x] == Block.WALL) {
 					numNeighboringOnes++;
 				}
 			}
 		}
-		return (numNeighboringOnes < 3) && maze[node.y][node.x] != 1;
+		return (numNeighboringOnes < 3) && maze[node.y][node.x] != Block.WALL;
 	}
 
 	private void randomlyAddNodesToStack(ArrayList<Node> nodes) {
