@@ -10,7 +10,7 @@ import maze_generator.MazeGenerator;
 public class Program {
 
 	public static void main(String[] args) {
-		MazeGenerator mazeGenerator = new MazeGenerator(14);
+		MazeGenerator mazeGenerator = new MazeGenerator();
 		mazeGenerator.generateMaze();
 		Block[][] maze = mazeGenerator.getMaze();
 		for (Block[] blocks : maze) {

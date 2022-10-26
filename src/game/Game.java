@@ -19,7 +19,7 @@ public class Game extends Component implements IKeyboardObserver {
 	Integer movements;
 
 	public Game() {
-		mazeGenerator = new MazeGenerator(14);
+		mazeGenerator = new MazeGenerator();
 		maze = mazeGenerator.getMaze();
 		character = new Character();
 		if (MazeGameConfiguration.withEnemy) {
@@ -56,32 +56,32 @@ public class Game extends Component implements IKeyboardObserver {
 					graphics.setColor(Color.blue);
 					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
 					break;
-				case PERMANENT_WALL:
-					graphics.setColor(Color.blue);
-					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
-					break;
-				case END:
-					graphics.setColor(Color.white);
-					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
-					break;
-				
-				case type0:
-					graphics.setColor(Color.white);
-					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
-					break;
-				case type1:
-					graphics.setColor(Color.blue);
-					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
-					break;
-				case type2:
-					graphics.setColor(Color.red);
-					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
-					break;
-				case type4:
-					graphics.setColor(Color.green);
-					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
-					break;
-					
+//				case PERMANENT_WALL:
+//					graphics.setColor(Color.blue);
+//					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+//					break;
+//				case END:
+//					graphics.setColor(Color.white);
+//					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+//					break;
+//				
+//				case type0:
+//					graphics.setColor(Color.white);
+//					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+//					break;
+//				case type1:
+//					graphics.setColor(Color.blue);
+//					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+//					break;
+//				case type2:
+//					graphics.setColor(Color.red);
+//					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+//					break;
+//				case type4:
+//					graphics.setColor(Color.green);
+//					graphics.fillRect(i*dimension, j*dimension, dimension, dimension);
+//					break;
+//					
 					
 				}
 			}

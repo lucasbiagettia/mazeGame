@@ -1,19 +1,24 @@
 package maze_generator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
+
+import game.MazeGameConfiguration;
 
 public class MazeGenerator {
 
 	private Stack<Node> stack = new Stack<>();
 	private Random rand = new Random();
 	private Block[][] maze;
-	private int dimension;
+	private Integer rows;
+	private Integer columns;
 
-	public MazeGenerator(int dim) {
-		maze = new Block[dim][dim];
-		dimension = dim;
+	public MazeGenerator() {
+		rows = MazeGameConfiguration.rows;
+		columns = MazeGameConfiguration.columns;
+		maze = new Block[rows][columns];
 	}
 
 	public void generateMaze() {
@@ -22,6 +27,7 @@ public class MazeGenerator {
 			Node next = stack.pop();
 			if (validNextNode(next)) {
 				maze[next.y][next.x] = Block.WALL;
+
 				ArrayList<Node> neighbors = findNeighbors(next);
 				randomlyAddNodesToStack(neighbors);
 			}
@@ -65,7 +71,7 @@ public class MazeGenerator {
 	}
 
 	private Boolean pointOnGrid(int x, int y) {
-		return x >= 0 && y >= 0 && x < dimension && y < dimension;
+		return x >= 0 && y >= 0 && x < columns && y < rows;
 	}
 
 	private Boolean pointNotCorner(Node node, int x, int y) {
