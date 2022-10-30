@@ -22,6 +22,7 @@ public class MazeGenerator {
 	}
 
 	public void generateMaze() {
+		generateFreeMaze();
 		stack.push(new Node(0, 0));
 		while (!stack.empty()) {
 			Node next = stack.pop();
@@ -30,6 +31,28 @@ public class MazeGenerator {
 
 				ArrayList<Node> neighbors = findNeighbors(next);
 				randomlyAddNodesToStack(neighbors);
+			}
+		}
+//		for (int i = 0; i < maze.length; i++) {
+//			for (int j = 0; j< maze[i].length; j++){
+//				if (maze[i][j] != Block.WALL) {
+//					maze[i][j] = Block.FREE;
+//				}
+//			}
+//		}
+//		for (Block[] blocks : maze) {
+//			for(Block block: blocks) {
+//				if (block != Block.WALL) {
+//					block = Block.FREE;
+//				}
+//			}
+//		}
+	}
+
+	private void generateFreeMaze() {
+		for (int i = 0; i < maze.length; i++) {
+			for (int j = 0; j < maze[i].length; j++) {
+				maze[i][j] = Block.FREE;
 			}
 		}
 	}
