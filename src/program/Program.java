@@ -12,14 +12,6 @@ public class Program {
 	public static void main(String[] args) {
 		MazeGenerator mazeGenerator = new MazeGenerator();
 		mazeGenerator.generateMaze();
-		Block[][] maze = mazeGenerator.getMaze();
-		for (Block[] blocks : maze) {
-			for (Block blocks2 : blocks) {
-				System.out.print(blocks2 + "  ");
-			}
-			System.out.println(blocks);
-		}
-
 		JFrame gameWindow = new JFrame("Primer laberinto");
 		Game game = new Game();
 		gameWindow.add(game);
